@@ -68,7 +68,7 @@ class VideoListScreen extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                                 color: MyColors.commonContainerColor,
-                                borderRadius: BorderRadius.circular(10)
+                                borderRadius: BorderRadius.circular(20)
                             ),
                           //  height: 300.h,
                             child: Column(

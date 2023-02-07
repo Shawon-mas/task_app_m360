@@ -20,18 +20,11 @@ class VideoListController extends GetxController{
   var videoUrl=''.obs;
   var urlCache=''.obs ;
 
-   Future getAllVideo() async{
+   Future _getAllVideo() async{
      var response = await generalGet(url: ApiServices.baseUrl);
      if(response!=null){
        VideoResponse videoResponse = VideoResponse.fromJson(json.decode(response.body));
        videos.value=videoResponse.data!;
-       for(var url in videos){
-         videoUrl.value=url.videoUrl.toString();
-         print(videoUrl.value);
-
-       }
-       SharedPreferences prefs = await SharedPreferences.getInstance();
-       prefs.setString('video_url', videoUrl.toString());
        isVideoLoading.value = true;
        print(videoResponse);
      }
@@ -40,46 +33,17 @@ class VideoListController extends GetxController{
   }
 
 
-/*  Future<VideosResponse> fetchVideos() async {
-    var response = await generalGet(url: ApiServices.baseUrl);
-
-    if (response!.statusCode == 200) {
-      print(json.decode(response.body));
-      return VideosResponse.fromJson(json.decode(response.body));
-
-    } else {
-      throw Exception('Failed to load videos');
-    }
-  }*/
-
-
-
-/*  videoPlayer(){
-    videoPlayerController = VideoPlayerController.network(videoUrl.toString())
-      ..initialize().then((_) {
-        videoPlayerController.play();
-      });
-  }*/
-
 
   @override
   void onInit() {
     // TODO: implement onInit
-    getAllVideo();
+    _getAllVideo();
  //  videoPlayer();
   //  fetchVideos();
     super.onInit();
-    videoPlayerController = VideoPlayerController.network(videoUrl.toString())
-      ..addListener(() =>  ((){}))
-      ..setLooping(true)
-    ..initialize().then((value) => videoPlayerController.pause());
+
   }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    videoPlayerController.dispose();
-    super.dispose();
-  }
+
 
 
 }

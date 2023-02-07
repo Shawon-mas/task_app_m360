@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         useInheritedMediaQuery: false,
         builder: (context, child) {
           return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
             home: VideoListScreen(),
           );
         });
